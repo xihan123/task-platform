@@ -1,0 +1,274 @@
+/* ============================================================
+   ADMIN 工作台专属样式（共享 token 与组件见 app/globals.css）
+   ============================================================ */
+
+/* ---------------- dashboard ---------------- */
+
+.dash-head {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-5);
+}
+
+.dash-head h2 {
+  font-size: var(--t-22);
+  font-weight: 600;
+  letter-spacing: var(--ls-22);
+}
+
+.dash-head .when {
+  margin-left: auto;
+  font-size: var(--t-12);
+  color: var(--ink-4);
+  text-align: right;
+  line-height: 1.5;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-5);
+}
+
+.stat {
+  background: var(--s1);
+  border: 1px solid var(--line);
+  border-radius: var(--r-3);
+  padding: var(--sp-4);
+}
+
+.stat:hover {
+  border-color: var(--line-strong);
+}
+
+.stat-k {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--t-13);
+  color: var(--ink-3);
+  font-weight: 500;
+}
+
+.stat-n {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  margin-top: var(--sp-2);
+}
+
+.stat-n b {
+  font-size: var(--t-28);
+  font-weight: 600;
+  letter-spacing: var(--ls-28);
+  line-height: 1.1;
+}
+
+.stat-n span {
+  font-size: var(--t-12);
+  color: var(--ink-4);
+}
+
+.stat-note {
+  margin-top: var(--sp-2);
+  padding-top: var(--sp-2);
+  border-top: 1px solid var(--line);
+  font-size: var(--t-12);
+  color: var(--ink-4);
+}
+
+.stat-hot b {
+  color: var(--st-open-fg);
+}
+
+.queues {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-3);
+}
+
+.q-icon {
+  display: inline-flex;
+  color: var(--ink-4);
+}
+
+.q-list {
+  padding: var(--sp-1) 0;
+}
+
+.q-row {
+  display: block;
+  padding: var(--sp-2) var(--sp-4);
+  border-bottom: 1px solid var(--line);
+}
+
+.q-list .q-row:last-child {
+  border-bottom: 0;
+}
+
+.q-row:hover {
+  background: var(--s1);
+}
+
+.q-t {
+  font-size: var(--t-13);
+  color: var(--ink);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.q-m {
+  margin-top: 2px;
+  font-size: var(--t-12);
+  color: var(--ink-4);
+  font-family: var(--font-mono);
+}
+
+/* ---------------- table extras ---------------- */
+
+.filter-label {
+  font-size: var(--t-13);
+  color: var(--ink-4);
+}
+
+.reason-cell {
+  font-size: var(--t-12);
+  color: var(--ink-3);
+  overflow-wrap: anywhere;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  width: 300px;
+  max-width: 100%;
+}
+
+/* ---------------- AI config ---------------- */
+
+.provider-list {
+  display: grid;
+  gap: var(--sp-4);
+}
+
+.provider-group {
+  padding: var(--sp-4) var(--sp-5) var(--sp-5);
+}
+
+.provider-group > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+}
+
+.provider-title {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: center;
+  min-width: 0;
+}
+
+.provider-title .ic {
+  color: var(--ink-4);
+  display: inline-flex;
+}
+
+.provider-title h2 {
+  font-size: var(--t-14);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.provider-title .muted {
+  display: block;
+  margin-top: 2px;
+}
+
+.toggle-label {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  font-size: var(--t-12);
+  color: var(--ink-3);
+}
+
+.provider-parts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-8);
+  margin-top: var(--sp-4);
+}
+
+.provider-parts .block-h {
+  margin-bottom: var(--sp-1);
+}
+
+.provider-parts .block-h h3 {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  color: var(--ink-3);
+}
+
+.provider-parts .block-h .btn {
+  height: 24px;
+  width: 24px;
+}
+
+.provider-disabled {
+  opacity: 0.6;
+}
+
+.resource-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-2) 0;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--t-13);
+}
+
+.resource-row:last-child {
+  border-bottom: 0;
+}
+
+.resource-row > span {
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
+.resource-row code {
+  font-family: var(--font-mono);
+  font-size: var(--t-12);
+  color: var(--ink-2);
+}
+
+/* ---------------- responsive ---------------- */
+
+@media (max-width: 1100px) {
+  .stats,
+  .queues {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .provider-parts {
+    grid-template-columns: 1fr;
+    gap: var(--sp-4);
+  }
+
+  .provider-group > header {
+    align-items: flex-start;
+  }
+
+  .dash-head .when {
+    display: none;
+  }
+}

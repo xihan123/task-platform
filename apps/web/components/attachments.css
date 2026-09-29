@@ -1,0 +1,178 @@
+.attachment-list,
+.attachment-picker {
+  margin-top: 16px;
+  display: grid;
+  gap: 10px;
+}
+.attachment-picker {
+  padding: 14px;
+  border: 1px dashed var(--line, #d0d7de);
+  border-radius: 6px;
+}
+.attachment-picker > .btn {
+  justify-self: start;
+}
+.attachment-help,
+.attachment-file small {
+  color: var(--muted, #656d76);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.attachment-file {
+  display: grid;
+  gap: 4px;
+  padding: 10px 12px;
+  border: 1px solid var(--line, #d0d7de);
+  border-radius: 6px;
+  overflow-wrap: anywhere;
+}
+.attachment-file button {
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--accent, #0969da);
+  cursor: pointer;
+  font: inherit;
+  overflow-wrap: anywhere;
+}
+.attachment-file button:disabled {
+  color: var(--muted, #656d76);
+  cursor: default;
+}
+.attachment-selected {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.attachment-selected span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.revision-feedback {
+  border: 1px solid #d4a72c;
+  background: #fff8c5;
+  color: #664d03;
+  padding: 16px;
+  border-radius: 6px;
+  margin: 16px 0;
+}
+.revision-feedback p {
+  margin-top: 8px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.d-grid.issue-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  align-items: start;
+  gap: 24px;
+}
+.issue-layout > div,
+.issue-layout > aside {
+  min-width: 0;
+}
+.issue-sidebar .meta4 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+.issue-sidebar summary {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 14px 0;
+}
+.issue-sidebar .hist {
+  padding: 0;
+}
+.issue-sidebar .hist li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  overflow-wrap: anywhere;
+}
+.issue-discussion {
+  margin-top: 28px;
+  scroll-margin-top: 70px;
+}
+.task-chat.issue-discussion {
+  border: 0;
+  background: var(--s0);
+}
+.issue-discussion .chat-header {
+  padding: 0 0 12px;
+  margin-bottom: 16px;
+}
+.issue-discussion .chat-history {
+  padding: 0 0 20px;
+  background: var(--s0);
+}
+.issue-discussion .chat-empty {
+  padding: 28px 0;
+}
+.issue-discussion .chat-messages {
+  gap: 20px;
+}
+.issue-discussion .chat-messages li {
+  position: relative;
+  margin-left: 46px;
+  width: calc(100% - 46px);
+  overflow: visible;
+}
+.issue-discussion .chat-messages li::before {
+  content: attr(data-initial);
+  display: grid;
+  place-items: center;
+  position: absolute;
+  left: -46px;
+  top: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+.issue-discussion .chat-messages li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: -31px;
+  top: 40px;
+  bottom: -13px;
+  width: 1px;
+  background: var(--line);
+}
+.issue-discussion .message-meta {
+  border-radius: 6px 6px 0 0;
+}
+.issue-discussion .chat-composer {
+  margin-top: 16px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+.issue-layout .priv {
+  border-color: var(--line);
+}
+.issue-layout .priv-top {
+  background: var(--s1);
+  color: var(--ink-3);
+  border-color: var(--line);
+}
+.issue-discussion .chat-messages .attachment-list {
+  padding: 0 14px 14px;
+  margin-top: 0;
+}
+.chat-quota {
+  font-size: 12px;
+  color: var(--ink-3);
+  margin-top: 12px;
+}
+@media (max-width: 960px) {
+  .d-grid.issue-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .issue-layout > aside {
+    grid-row: 1;
+  }
+}

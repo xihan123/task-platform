@@ -1,0 +1,85 @@
+[
+  {
+    "id": "office_docs",
+    "label": "表格与办公文档",
+    "description": "Excel 公式或 Python 代码、表格处理、Word 转换与批量文档处理",
+    "technologies": ["Excel", "Word", "Python", "C#", "WPF"]
+  },
+  {
+    "id": "python_data",
+    "label": "Python 脚本与数据处理",
+    "description": "脚本自动化、数据清洗、CSV/JSON/SQLite 数据处理",
+    "technologies": ["Python", "CSV", "JSON", "SQLite"]
+  },
+  {
+    "id": "web_frontend",
+    "label": "网站与前端",
+    "description": "简单网站、页面和前端交互",
+    "technologies": ["Vue", "React", "TypeScript", "JavaScript", "Nuxt"]
+  },
+  {
+    "id": "web_backend",
+    "label": "后端与 API",
+    "description": "网站服务端、接口、数据存储与部署",
+    "technologies": [
+      "Node.js",
+      "Python",
+      "Go",
+      "Java",
+      "Kotlin",
+      "MySQL",
+      "MongoDB",
+      "Redis",
+      "Docker"
+    ]
+  },
+  {
+    "id": "android_app",
+    "label": "安卓应用",
+    "description": "Android 客户端与组件开发",
+    "technologies": ["Kotlin", "Java", "Jetpack Compose", "Android"]
+  },
+  {
+    "id": "android_tools",
+    "label": "安卓模块与调试",
+    "description": "经授权的 Android 模块、应用调试与分析",
+    "technologies": ["Xposed", "LSPosed", "JEB", "Kotlin", "Python"]
+  },
+  {
+    "id": "desktop_apps",
+    "label": "桌面软件",
+    "description": "Windows 桌面程序和文件处理工具",
+    "technologies": ["C#", "WPF", "Rust"]
+  },
+  {
+    "id": "network_system",
+    "label": "系统与网络工具",
+    "description": "网络诊断、系统工具与轻量服务部署",
+    "technologies": [
+      "Go",
+      "Rust",
+      "C#",
+      "Docker",
+      "Cloudflare Workers",
+      "Linux"
+    ]
+  },
+  {
+    "id": "ai_integration",
+    "label": "AI 与模型集成",
+    "description": "模型推理、训练管道与 AI 工具集成",
+    "technologies": ["Python", "Rust", "BERT", "ONNX Runtime", "MCP"]
+  },
+  {
+    "id": "media_conversion",
+    "label": "音视频与文件转换",
+    "description": "音频、视频及文件格式处理工具",
+    "technologies": ["FFmpeg", "Rust", "Shell", "Python"]
+  },
+  {
+    "id": "other",
+    "label": "其他／待判断",
+    "description": "没有合适分类时选择，由管理员判断是否可以接取",
+    "technologies": []
+  }
+]

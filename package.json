@@ -1,0 +1,38 @@
+{
+  "name": "task-platform",
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "node": ">=24 <25",
+    "pnpm": ">=11 <13"
+  },
+  "scripts": {
+    "postinstall": "node scripts/setup-env.mjs",
+    "dev": "pnpm --parallel --filter @task-platform/web --filter @task-platform/api run dev",
+    "build": "pnpm -r --if-present run build",
+    "lint": "eslint scripts eslint.config.mjs && pnpm -r run lint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "pnpm -r run typecheck",
+    "test": "pnpm -r --if-present run test",
+    "test:integration": "pnpm --filter @task-platform/api test:integration",
+    "test:e2e": "pnpm --filter @task-platform/api test:e2e",
+    "test:browser": "pnpm --filter @task-platform/web test:browser",
+    "test:smoke": "node scripts/smoke.mjs",
+    "env:setup": "node scripts/setup-env.mjs",
+    "db:migrate": "pnpm --filter @task-platform/api db:migrate",
+    "db:seed": "pnpm --filter @task-platform/api db:seed",
+    "ai:configure": "pnpm --filter @task-platform/api ai:configure",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.39.5",
+    "@types/node": "26.6.3",
+    "eslint": "9.39.5",
+    "eslint-config-prettier": "10.1.8",
+    "prettier": "3.9.9",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.0"
+  }
+}

@@ -1,0 +1,27 @@
+# Keep every text file LF in the repository and in the working tree.
+# Git for Windows enables core.autocrlf=true by default, which would otherwise
+# check these files out as CRLF and make `pnpm format:check` fail.
+* text=auto eol=lf
+
+# Binary assets: never convert line endings.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.svg text eol=lf
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.pdf binary
+*.zip binary
+*.tar binary
+*.gz binary
+
+# Generated files: collapse them in diffs on GitHub.
+pnpm-lock.yaml linguist-generated=true
+apps/api/internal/db/db.go linguist-generated=true
+apps/api/internal/db/models.go linguist-generated=true
+apps/api/internal/db/queries.sql.go linguist-generated=true

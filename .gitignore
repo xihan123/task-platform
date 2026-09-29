@@ -1,0 +1,24 @@
+node_modules/
+.next/
+out/
+dist/
+.test-dist/
+coverage/
+*.tsbuildinfo
+*.log
+
+.env
+.env.*
+!.env.example
+
+.DS_Store
+Thumbs.db
+.idea/
+
+# Local artifacts and scratch directories
+.data/
+/temp.zip
+
+# AI agent instruction files (local only)
+AGENTS.md
+CLAUDE.md

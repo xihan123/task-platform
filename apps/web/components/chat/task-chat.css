@@ -1,0 +1,302 @@
+/* ============================================================
+   任务会话（工作台与公开侧共用；共享 token 见 app/globals.css）
+   ============================================================ */
+
+.task-chat {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: var(--r-3);
+  background: var(--s0);
+  color: var(--ink-2);
+  font-size: var(--t-14);
+  min-width: 0;
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  height: 38px;
+  padding: 0 var(--sp-4);
+  border-bottom: 1px solid var(--line);
+}
+
+.chat-header h3 {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--t-13);
+  font-weight: 600;
+  letter-spacing: var(--ls-14);
+  margin: 0;
+}
+
+.chat-header > div {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.chat-connection {
+  font-size: var(--t-12);
+  color: var(--ink-4);
+}
+
+.chat-connection.online {
+  color: var(--st-done-fg);
+}
+
+.task-chat .chat-icon {
+  width: 24px;
+  height: 24px;
+  min-height: 24px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-1);
+  color: var(--ink-4);
+}
+
+.task-chat .chat-icon:hover {
+  background: var(--s2);
+  color: var(--ink);
+}
+
+.chat-history {
+  min-height: 100px;
+  padding: var(--sp-3);
+  background: var(--s1);
+  border-radius: 0 0 0 0;
+}
+
+.chat-history-control {
+  text-align: center;
+  margin-bottom: var(--sp-3);
+}
+
+.chat-history-control .btn {
+  height: 24px;
+  font-size: var(--t-12);
+}
+
+.chat-empty {
+  text-align: center;
+  color: var(--ink-4);
+  padding: 64px 0;
+  margin: 0;
+  font-size: var(--t-13);
+}
+
+.chat-messages {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.chat-messages li {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-self: flex-start;
+  width: 100%;
+  max-width: 100%;
+  min-width: 150px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--s0);
+}
+
+.message-meta {
+  padding: 10px 14px;
+  background: var(--s1);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ink-4);
+  font-size: var(--t-12);
+}
+
+.message-meta span {
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.message-meta time {
+  margin-left: auto;
+  font-family: var(--font-mono);
+}
+
+.chat-messages p {
+  margin: 0;
+  background: var(--s0);
+  border: 0;
+  padding: 14px;
+  border-radius: var(--r-3);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.6;
+  font-size: var(--t-14);
+  color: var(--ink-2);
+}
+
+.chat-messages li.own-message {
+  align-self: flex-start;
+}
+
+.own-message p {
+  background: var(--s0);
+  color: var(--ink-2);
+}
+
+/* ---------------- 双人闸（完成确认区） ---------------- */
+
+.task-completion {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3);
+  border-top: 1px solid var(--line);
+  background: var(--s1);
+}
+
+.task-completion svg {
+  color: var(--ink-4);
+}
+
+.task-completion p {
+  margin: 0;
+  flex: 1;
+  font-size: var(--t-13);
+  color: var(--ink-3);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.task-completion .btn {
+  flex: none;
+}
+
+/* ---------------- 输入区 ---------------- */
+
+.chat-composer {
+  padding: var(--sp-3);
+  border-top: 1px solid var(--line);
+}
+
+.chat-label {
+  display: block;
+  font-size: var(--t-12);
+  margin-bottom: var(--sp-2);
+  color: var(--ink-4);
+}
+
+.task-chat textarea {
+  width: 100%;
+  min-height: 56px;
+  max-height: 220px;
+  resize: vertical;
+  font: inherit;
+  font-size: var(--t-13);
+}
+
+.chat-composer > div:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--sp-2);
+}
+
+.chat-composer > div > span {
+  color: var(--ink-4);
+  font-size: var(--t-12);
+  font-variant-numeric: tabular-nums;
+}
+
+.chat-error {
+  color: var(--danger-fg);
+  font-size: var(--t-12);
+  line-height: 1.7;
+  margin: var(--sp-3) var(--sp-4);
+  overflow-wrap: anywhere;
+}
+
+.chat-readonly {
+  margin: 0;
+  border-top: 1px solid var(--line);
+  background: var(--s1);
+  padding: var(--sp-3);
+  font-size: var(--t-12);
+  color: var(--ink-3);
+  text-align: center;
+}
+
+/* ---------------- 我的任务中的会话列表 ---------------- */
+
+.my-conversations {
+  margin-top: var(--sp-6);
+  padding: var(--sp-4);
+}
+
+.my-conversations h3 {
+  font-size: var(--t-13);
+  font-weight: 600;
+  letter-spacing: var(--ls-14);
+  margin-bottom: var(--sp-2);
+}
+
+.my-conversations p {
+  font-size: var(--t-13);
+  color: var(--ink-4);
+}
+
+.chat-task-links {
+  margin: var(--sp-2) 0 0;
+  list-style: none;
+  padding: 0;
+}
+
+.chat-task-links li {
+  border-bottom: 1px solid var(--line);
+  padding: var(--sp-2) 0;
+}
+
+.chat-task-links li:last-child {
+  border-bottom: 0;
+}
+
+.chat-task-links a {
+  font-size: var(--t-13);
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+  display: block;
+}
+
+.chat-task-links a:hover {
+  color: var(--accent);
+}
+
+.conversation-pages {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+}
+
+@media (max-width: 480px) {
+  .chat-history {
+    padding: var(--sp-3);
+    height: 340px;
+  }
+
+  .chat-messages li {
+    max-width: 93%;
+  }
+}

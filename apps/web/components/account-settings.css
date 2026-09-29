@@ -1,0 +1,103 @@
+.settings-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
+  gap: var(--sp-4);
+  align-items: start;
+  max-width: 1080px;
+}
+
+.settings-sections {
+  display: grid;
+  gap: var(--sp-4);
+  min-width: 0;
+}
+.settings-panel {
+  min-width: 0;
+}
+.settings-panel .panel-head {
+  color: var(--ink-3);
+}
+.settings-panel .panel-head h2 {
+  color: var(--ink);
+  font-size: var(--t-13);
+  font-weight: 600;
+}
+.settings-panel .panel-head .tag {
+  margin-left: auto;
+}
+.settings-panel-body {
+  padding: var(--sp-4);
+}
+.settings-account-details {
+  display: grid;
+  gap: var(--sp-5);
+  padding: var(--sp-4);
+}
+.settings-account-details dt {
+  color: var(--ink-4);
+  font-size: var(--t-12);
+  margin-bottom: var(--sp-1);
+}
+.settings-account-details dd {
+  font-size: var(--t-13);
+  overflow-wrap: anywhere;
+}
+.settings-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-4);
+}
+.settings-row > div {
+  min-width: 0;
+}
+.settings-row h3,
+.settings-row label {
+  font-size: var(--t-13);
+  font-weight: 500;
+  color: var(--ink);
+}
+.settings-row .btn {
+  flex-shrink: 0;
+}
+.settings-help {
+  color: var(--ink-3);
+  font-size: var(--t-13);
+  line-height: 1.6;
+  margin-top: var(--sp-1);
+}
+.settings-form {
+  margin-top: var(--sp-4);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--line);
+}
+.settings-form > .btn {
+  margin-top: var(--sp-3);
+}
+.settings-panel-body > .error-text,
+.settings-panel-body > .notice-text {
+  margin-top: var(--sp-3);
+}
+.settings-login {
+  max-width: 440px;
+  margin-inline: auto;
+}
+.settings-login > .notice-text {
+  margin-bottom: var(--sp-4);
+}
+
+@media (max-width: 900px) {
+  .settings-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .settings-account-details {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .settings-account-details {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-3);
+  }
+}

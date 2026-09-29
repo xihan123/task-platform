@@ -1,0 +1,78 @@
+name: task-platform
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-task_platform}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-task_platform_dev}
+      POSTGRES_DB: ${POSTGRES_DB:-task_platform}
+    ports:
+      - '127.0.0.1:${POSTGRES_PORT:-5432}:5432'
+    volumes:
+      - postgres_go_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+
+  redis:
+    image: redis:8-alpine
+    command: ['redis-server', '--save', '', '--appendonly', 'no']
+    ports:
+      - '127.0.0.1:${REDIS_PORT:-6379}:6379'
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
+
+  api:
+    profiles: [app]
+    image: task-platform-api:go
+    build:
+      context: .
+      target: api
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: ${API_DATABASE_URL:-postgresql://${POSTGRES_USER:-task_platform}:${POSTGRES_PASSWORD:-task_platform_dev}@postgres:5432/${POSTGRES_DB:-task_platform}}
+      REDIS_URL: redis://redis:6379
+      REDIS_KEY_PREFIX: ${REDIS_KEY_PREFIX:-task-platform-go:}
+      WEB_ORIGINS: ${WEB_ORIGINS:-}
+      TRUST_PROXY_HOPS: 1
+      AI_KEY_ENCRYPTION_KEY: ${AI_KEY_ENCRYPTION_KEY:-}
+      MODERATION_ENABLED: ${MODERATION_ENABLED:-true}
+      AI_TIMEOUT_MS: ${AI_TIMEOUT_MS:-120000}
+      AI_COOLDOWN_SECONDS: ${AI_COOLDOWN_SECONDS:-60}
+      EMAIL_ENABLED: ${EMAIL_ENABLED:-false}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_SECURE: ${SMTP_SECURE:-false}
+      SMTP_REQUIRE_TLS: ${SMTP_REQUIRE_TLS:-true}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      MAIL_FROM: ${MAIL_FROM:-}
+      APP_URL: ${APP_URL:-}
+      MAIL_ENCRYPTION_KEY: ${MAIL_ENCRYPTION_KEY:-}
+    ports:
+      - '127.0.0.1:${API_PORT:-4000}:4000'
+    volumes:
+      - attachments_go_data:/var/lib/task-platform/attachments
+    healthcheck:
+      test: ['CMD', '/api', 'healthcheck']
+      interval: 10s
+      timeout: 5s
+      retries: 6
+
+volumes:
+  postgres_go_data:
+  attachments_go_data:

@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 安全问题
+    url: https://github.com/xihan123
+    about: 请勿在公开 issue 中发布漏洞细节，先通过维护者主页提供的私密渠道联系。

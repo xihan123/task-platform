@@ -1,0 +1,111 @@
+name: Build and deliver
+
+# 后端：构建 API 镜像并导出 tar（离线介质流程，见 README.md「工作流交付」）。
+# 前端：编译 apps/web/out 静态导出并上传 FTP。
+#
+# 本工作流只负责构建和交付，不运行 lint、typecheck、test 等检查；
+# 提交前的检查在本地执行，见 CONTRIBUTING.md。
+#
+# 所需仓库 Secrets（Settings → Secrets and variables → Actions）：
+#   FTP_SERVER    FTP 主机（如 192.168.1.10 或域名）
+#   FTP_USERNAME  FTP 账号
+#   FTP_PASSWORD  FTP 口令
+# 可选 Variables：
+#   CI_HTTP_PROXY   runner 拉取镜像、pnpm、Node 的 HTTP 代理
+#   FTP_SERVER_DIR  上传目标目录（默认 /）
+#   FTP_PORT        端口（默认 21）
+#   FTP_PROTOCOL    ftp / ftps / ftps-legacy（默认 ftp）
+# FTP 上传与 artifact 归档不走代理；Node 24 的 fetch 需 NODE_USE_ENV_PROXY=1 才会读取代理变量。
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  CI_HTTP_PROXY: ${{ vars.HTTP_PROXY }}
+
+jobs:
+  backend-image:
+    name: Build API image tar
+    runs-on: ubuntu-latest
+    env:
+      HTTP_PROXY: ${{ vars.CI_HTTP_PROXY }}
+      HTTPS_PROXY: ${{ vars.CI_HTTP_PROXY }}
+      http_proxy: ${{ vars.CI_HTTP_PROXY }}
+      https_proxy: ${{ vars.CI_HTTP_PROXY }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Set up Docker Buildx
+        uses: actions/setup-buildx-action@v3
+      - name: Build image
+        uses: actions/build-push-action@v6
+        with:
+          file: ./Dockerfile
+          context: .
+          tags: ${{ gitea.repository }}:latest
+          load: true
+      - name: Inspect
+        run: |
+          echo "Inspecting Docker image..."
+          docker inspect ${{ gitea.repository }}:latest
+          echo "Docker image inspection completed."
+
+  web-ftp:
+    name: Build web and upload FTP
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/setup@v2
+        env:
+          HTTP_PROXY: ${{ env.CI_HTTP_PROXY }}
+          HTTPS_PROXY: ${{ env.CI_HTTP_PROXY }}
+          http_proxy: ${{ env.CI_HTTP_PROXY }}
+          https_proxy: ${{ env.CI_HTTP_PROXY }}
+          NODE_USE_ENV_PROXY: '1'
+          npm_config_registry: https://registry.npmmirror.com
+          npm_config_node_mirror: https://npmmirror.com/mirrors/node
+        with:
+          runtime: node@24
+          version: 12
+          cache: true
+          cache-dependency-path: pnpm-lock.yaml
+          package-json-file: apps/web/package.json
+          install: false
+
+      - name: Build static web
+        working-directory: apps/web
+        env:
+          HTTP_PROXY: ${{ env.CI_HTTP_PROXY }}
+          HTTPS_PROXY: ${{ env.CI_HTTP_PROXY }}
+          http_proxy: ${{ env.CI_HTTP_PROXY }}
+          https_proxy: ${{ env.CI_HTTP_PROXY }}
+          NODE_USE_ENV_PROXY: '1'
+          npm_config_registry: https://registry.npmmirror.com
+          npm_config_node_mirror: https://npmmirror.com/mirrors/node
+        run: |
+          pnpm install --frozen-lockfile --ignore-scripts --registry https://registry.npmmirror.com
+          pnpm --filter @task-platform/web build
+
+      - name: Upload static web to FTP
+        if: ${{ secrets.FTP_SERVER != '' }}
+        uses: actions/FTP-Deploy-Action@v4.4.0
+        env:
+          HTTP_PROXY: ''
+          HTTPS_PROXY: ''
+          http_proxy: ''
+          https_proxy: ''
+          NODE_USE_ENV_PROXY: '0'
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ vars.FTP_PORT || 21 }}
+          protocol: ${{ vars.FTP_PROTOCOL || 'ftp' }}
+          local-dir: apps/web/out/
+          server-dir: ${{ vars.FTP_SERVER_DIR || '/' }}
+          dangerous-clean-slate: false

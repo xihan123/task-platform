@@ -1,0 +1,16 @@
+node_modules/
+.next/
+out/
+dist/
+.test-dist/
+coverage/
+pnpm-lock.yaml
+*.tsbuildinfo
+
+.env
+.env.*
+!.env.example
+
+AGENTS.md
+apps/web/next-env.d.ts
+.idea/

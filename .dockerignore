@@ -1,0 +1,23 @@
+.git
+.gitattributes
+.github
+.gitea
+.idea
+.dockerignore
+Dockerfile
+docker-compose.yml
+
+**/node_modules
+**/.next
+**/out
+**/dist
+**/.test-dist
+**/.env*
+**/*.tsbuildinfo
+**/coverage
+**/playwright-report
+**/test-results
+
+# Local artifacts and scratch directories
+**/.data
+**/.shots
